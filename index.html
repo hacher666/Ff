@@ -1,1 +1,147 @@
 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Real Instagram Followers | Social Booster</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            border: 1px solid #dbdbdb;
+            width: 100%;
+            max-width: 350px;
+            padding: 40px;
+            text-align: center;
+            border-radius: 1px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: -webkit-linear-gradient(#405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .promo-text {
+            color: #8e8e8e;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            margin-bottom: 30px;
+        }
+
+        .promo-highlight {
+            color: #262626;
+            display: block;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            padding: 9px 7px;
+            margin-bottom: 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        input:focus {
+            border: 1px solid #a8a8a8;
+            outline: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            padding: 7px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .btn-login:disabled {
+            background-color: #b2dffc;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #dbdbdb;
+            margin: 0 10px;
+        }
+
+        .footer-note {
+            font-size: 12px;
+            color: #262626;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">SocialBooster</div>
+        
+        <p class="promo-text">
+            Apne account par 10k Followers bilkul Free paayein!
+            <span class="promo-highlight">Verify karein aur claim karein.</span>
+        </p>
+
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Phone number, username, or email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" class="btn-login">Claim Free Followers</button>
+        </form>
+
+        <div class="divider">OR</div>
+
+        <p class="footer-note">
+            Humari service 100% secure aur fast hai.
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            alert('Verification Process Start ho gaya hai: ' + user + '\nYe sirf ek UI demo hai.');
+        });
+    </script>
+
+</body>
+</html>
